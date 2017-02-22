@@ -4,13 +4,16 @@
 #print usage
 usage() { echo "Usage: $0 [-d <duration>] [-f <fade>] [-i <image dir>]" 1>&2; exit 1; }
 #parse arguments
-while getopts ":d:f:i:" o; do
+while getopts ":d:a:t:i:" o; do
     case "${o}" in
         d)
             DURATION=${OPTARG}
             ;;
         f)
             FADE=${OPTARG}
+            ;;
+        t)
+            TIME=${OPTARG}
             ;;
 	i)
 	    IMAGEDIR=${OPTARG}
@@ -28,6 +31,9 @@ fi
 if [ -z "${FADE}" ]; then
     FADE=2
 fi
+if [ -z "${TIME}" ]; then
+    FADE=1
+fi
 
 #set image directory
 #if ! [ -z "${IMAGEDIR}" ]; then
@@ -36,7 +42,7 @@ fi
 #fi
 
 #make sure xrandr already was set up
-sleep 2
+sleep $TIME
 #get screen resolutions of active monitors with offset
 RESOLUTIONS=$(xrandr | egrep '*\+' | sed -n 's/.*connected\|.*primary //p' | awk '{print $1;}')
 #create command with glslideshow and xwinwrap for each screen
