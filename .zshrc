@@ -15,6 +15,7 @@ compinit
 neofetch
 
 alias ranger='ranger --choosedir=$HOME/rangerdir; LASTDIR=`cat $HOME/rangerdir`; cd "$LASTDIR"'
+alias ide='~/.bin/ide.sh'
 export PATH=~/.bin:$PATH
 
 
