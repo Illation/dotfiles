@@ -32,7 +32,7 @@ if [ -z "${FADE}" ]; then
     FADE=2
 fi
 if [ -z "${TIME}" ]; then
-    FADE=1
+    TIME=1
 fi
 
 #set image directory

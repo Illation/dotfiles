@@ -80,8 +80,8 @@ bindsym $mod+Shift+v layout toggle split
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split 
+bindsym $mod+t layout tabbed
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -171,10 +171,25 @@ new_float pixel 4
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
+# make sure bar dialogs are opened as floating windows
+for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="Xfce4-notifyd"] border none
+
+# status bar applets
+for_window [class="YADWIN"] floating enable
+for_window [class="YADWIN"] move absolute position mouse
+for_window [class="YADWIN" title="yad display"] move position center
+
+for_window [instance="Download"] floating enable
+for_window [class="Pnmixer"] floating enable
+for_window [window_role="plugin_ui"] floating enable
+for_window [title="Menu Update"] floating enable
+for_window [title="___"] floating enable
+
 set $bg-color #1D1E29
 bar 
 {
-        status_command i3status
+        status_command ~/.bin/conky-i3bar.sh
 	position top
 	colors 
 	{
@@ -183,9 +198,9 @@ bar
 }
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec ~/.bin/pacvol.sh up
+bindsym XF86AudioLowerVolume exec ~/.bin/pacvol.sh down
+bindsym XF86AudioMute exec ~/.bin/pacvol.sh toggle
 
 gaps inner 12
 smart_gaps on
@@ -193,8 +208,10 @@ smart_borders on
 
 bindsym $mod+shift+x exec dm-tool switch-to-greeter
 
-exec compton
+exec compton -f -GCb --backend glx --paint-on-overlay --vsync opengl-swc --glx-no-stencil
 exec ~/.bin/wallpaperSlideShow.sh -d 30
 
 #swap escape and capslock
 exec setxkbmap -option caps:swapescape
+exec_always qxkb
+#exec_always caps2esc
