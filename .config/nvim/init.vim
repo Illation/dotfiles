@@ -29,6 +29,7 @@
 	call dein#add("ervandew/supertab")
 	call dein#add("octol/vim-cpp-enhanced-highlight")
 	call dein#add("scrooloose/nerdcommenter")
+	call dein#add("iitaku/lldb.nvim")
 
 " utility
 	call dein#add('Yggdroot/indentLine')
@@ -61,5 +62,8 @@
 	nmap <F8> :TagbarToggle<CR>
 	nmap <F7> :NERDTreeToggle<CR>
 
-	let g:clang_library_path='/usr/lib/libclang.so.3.9'
+	let g:loaded_python3_provider=0
+	let g:python3_host_prog='/usr/bin/python3'
+	let g:python_host_prog='/usr/bin/python2'
+	let g:clang_library_path='/usr/lib/libclang.so.6.0'
 " }}}

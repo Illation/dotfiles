@@ -12,7 +12,7 @@
 set $mod Mod4
 
 #set screens in proper positions
-exec_always screenlayout.sh
+exec_always xrandr --output DVI-D-0 --off --output HDMI-0 --off --output DP-5 --mode 1920x1080 --pos 0x360 --rotate normal --output DP-4 --off --output DP-3 --off --output DP-2 --primary --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1 --off --output DP-0 --off
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -215,7 +215,7 @@ smart_borders on
 
 bindsym $mod+shift+x exec dm-tool switch-to-greeter
 
-exec compton -f -GCb --backend glx --paint-on-overlay --vsync opengl-swc --glx-no-stencil
+exec compton -f --backend glx --paint-on-overlay --vsync opengl-swc --glx-no-stencil -c --inactive-dim 0
 exec ~/.bin/wallpaperSlideShow.sh -d 30
 
 #swap escape and capslock
