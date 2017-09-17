@@ -24,7 +24,7 @@ while read;do
         ~/.bin/app_volume.sh input
       ;;
     \"off\")
-        ~/.bin/power_menu.sh input
+        oblogout
       ;;
     *)
       ;;

@@ -17,8 +17,8 @@ if [[ $ret -eq 2 ]]; then
 fi
 
 case $action in
-    Power*) cmd="sudo /sbin/poweroff" ;;
-    Reboot*) cmd="sudo /sbin/reboot" ;;
+    Power*) cmd="shutdown now" ;;
+    Reboot*) cmd="reboot" ;;
     Suspend*) cmd="sudo /bin/sh -c 'echo disk > /sys/power/state'" ;;
     Logout*) cmd="i3-msg exit" ;;
     *) exit 1 ;;    

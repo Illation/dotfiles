@@ -12,7 +12,7 @@
 set $mod Mod4
 
 #set screens in proper positions
-exec_always xrandr --output DP-5 --primary --mode 1920x1080 --pos 1280x0 --rotate normal --output HDMI-0 --mode 1280x1024 --pos 0x56 --rotate normal  
+exec_always screenlayout.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -138,7 +138,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec oblogout
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -175,12 +175,16 @@ new_float pixel 4
 for_window [class="Xfce4-notifyd"] floating enable
 for_window [class="Xfce4-notifyd"] border none
 
+for_window [class="Thunar"] floating enable
+
 # status bar applets
 for_window [class="YADWIN"] floating enable
 for_window [class="YADWIN"] move absolute position mouse
 for_window [class="YADWIN" title="yad display"] move position center
 
 for_window [instance="Download"] floating enable
+for_window [instance="oblogout"] fullscreen enable
+for_window [instance="oblogout"] floating enable
 for_window [class="Pnmixer"] floating enable
 for_window [window_role="plugin_ui"] floating enable
 for_window [title="Menu Update"] floating enable
@@ -189,6 +193,7 @@ for_window [title="___"] floating enable
 set $bg-color #1D1E29
 bar 
 {
+	tray_output none
         status_command ~/.bin/conky-i3bar.sh
 	position top
 	colors 

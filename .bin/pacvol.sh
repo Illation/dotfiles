@@ -7,15 +7,15 @@
 #           Need to fix this for systems with multiple sinks
 #
 
-SINK=1
+SINK=0
 STEP=1
 MAXVOL=65537 # let's just assume this is the same all over
 MUTED=0
 #MAXVOL=`pacmd list-sinks | grep "volume steps" | cut -d: -f2 | tr -d "[:space:]"`
 
-MUTED=`pacmd list-sinks 0 | grep muted | cut -d ' ' -f 2 | awk 'END {print $NF}'`
+MUTED=`pacmd list-sinks 0 | grep muted | cut -d ' ' -f 2 | awk 'NR==1 {print $1}'`
 #VOLPERC=`pactl list sinks | awk '/Volume: 0:/ {print substr($3, 1, index($3, "%") - 1)}' | head -n1`
-VOLPERC=`pactl list sinks | awk '/Volume: front-left:/ {print substr($5, 1, index($5, "%") - 1)}' | awk 'END {print $NF}'`
+VOLPERC=`pactl list sinks | awk '/Volume: front-left:/ {print substr($5, 1, index($5, "%") - 1)}' | awk 'NR==1 {print $1}'`
 SKIPOVERCHECK=1
 
 display(){
@@ -29,12 +29,12 @@ display(){
 }
 
 up(){
-	pactl set-sink-volume 1 +5%
+	pactl set-sink-volume 0 +5%
 	~/.bin/app_volume.sh display
 }
 
 down(){
-	pactl set-sink-volume 1 -5%
+	pactl set-sink-volume 0 -5%
 	~/.bin/app_volume.sh display
 }
 
@@ -66,7 +66,7 @@ unmute(){
 }
 
 toggle(){
-	pactl set-sink-mute 1 toggle
+	pactl set-sink-mute 0 toggle
 	~/.bin/app_volume.sh display
 }
 

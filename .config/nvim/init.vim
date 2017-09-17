@@ -28,6 +28,7 @@
 	call dein#add("majutsushi/tagbar")
 	call dein#add("ervandew/supertab")
 	call dein#add("octol/vim-cpp-enhanced-highlight")
+	call dein#add("scrooloose/nerdcommenter")
 
 " utility
 	call dein#add('Yggdroot/indentLine')
@@ -51,6 +52,8 @@
 	set softtabstop=4
 	set shiftwidth=4
 	set noexpandtab
+	set nowrap
+	set mouse=a
 
 	syntax on
 " }}}
