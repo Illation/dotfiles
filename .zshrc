@@ -7,6 +7,8 @@ bindkey -v
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/illation/.zshrc'
 
+TERM=xterm
+
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
